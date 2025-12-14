@@ -6,13 +6,13 @@ public class Veiculo {
     private int ano;
     private double valor;
 
-    public Veiculo(DadosVeiculo dadosVeiculo) {
-        this.marca = dadosVeiculo.marca();
-        this.modelo = dadosVeiculo.modelo();
-        this.combustivel = dadosVeiculo.combustivel();
-        this.ano = dadosVeiculo.ano();
-        this.valor = dadosVeiculo.valor();
-    }
+//    public Veiculo(Dados dadosVeiculo) {
+//        this.marca = dadosVeiculo.marca();
+//        this.modelo = dadosVeiculo.modelo();
+//        this.combustivel = dadosVeiculo.combustivel();
+//        this.ano = dadosVeiculo.ano();
+//        this.valor = dadosVeiculo.valor();
+//    }
 
     public String getMarca() {
         return marca;
