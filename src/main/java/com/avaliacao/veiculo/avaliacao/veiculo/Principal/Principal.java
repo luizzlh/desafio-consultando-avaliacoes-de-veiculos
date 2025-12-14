@@ -5,6 +5,7 @@ import com.avaliacao.veiculo.avaliacao.veiculo.service.ConsumoAPI;
 import com.avaliacao.veiculo.avaliacao.veiculo.service.ConverteDados;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -38,11 +39,11 @@ public class Principal {
         }
 
         var json = consumo.obterDados(endereco);
-
-        List<String> dadosMarca = new ArrayList<>();
-        dadosMarca.add(json);
-        var dado = dadosMarca.stream()
-;
+        System.out.println(json);
+        var marcas = conversor.obterLista(json, DadosMarca.class);
+        marcas.stream()
+                .sorted(Comparator.comparing(DadosMarca::codigo))
+                .forEach(System.out::println);
 
     }
 
