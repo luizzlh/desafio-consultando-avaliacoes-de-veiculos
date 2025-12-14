@@ -1,6 +1,7 @@
 package com.avaliacao.veiculo.avaliacao.veiculo.Principal;
 
-import com.avaliacao.veiculo.avaliacao.veiculo.models.DadosMarca;
+import com.avaliacao.veiculo.avaliacao.veiculo.models.Dados;
+import com.avaliacao.veiculo.avaliacao.veiculo.models.Modelos;
 import com.avaliacao.veiculo.avaliacao.veiculo.service.ConsumoAPI;
 import com.avaliacao.veiculo.avaliacao.veiculo.service.ConverteDados;
 
@@ -40,10 +41,25 @@ public class Principal {
 
         var json = consumo.obterDados(endereco);
         System.out.println(json);
-        var marcas = conversor.obterLista(json, DadosMarca.class);
+        var marcas = conversor.obterLista(json, Dados.class);
         marcas.stream()
-                .sorted(Comparator.comparing(DadosMarca::codigo))
+                .sorted(Comparator.comparing(Dados::codigo))
                 .forEach(System.out::println);
+
+        System.out.print("Informe o código da marca para consulta: ");
+        var codigoMarca = scanner.nextLine();
+
+        endereco = endereco + "/" + codigoMarca + "/modelos";
+        json = consumo.obterDados(endereco);
+        var modeloLista = conversor.obterDados(json, Modelos.class);
+        //System.out.println(modeloLista);
+        System.out.println("Modelos da Marca: ");
+        modeloLista.modelos()
+                .stream()
+                .sorted(Comparator.comparing(Dados::codigo))
+                .forEach(System.out::println);
+
+
 
     }
 

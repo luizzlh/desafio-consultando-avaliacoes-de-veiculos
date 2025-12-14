@@ -1,8 +1,9 @@
 package com.avaliacao.veiculo.avaliacao.veiculo.models;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record DadosModelo(int codigo,
-                          String modelo) {
+public record Dados(@JsonAlias("codigo") int codigo,
+                         @JsonAlias("nome") String nome) {
 }
