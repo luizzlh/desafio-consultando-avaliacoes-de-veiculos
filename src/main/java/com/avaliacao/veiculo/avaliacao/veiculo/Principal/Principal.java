@@ -2,7 +2,7 @@ package com.avaliacao.veiculo.avaliacao.veiculo.Principal;
 
 import com.avaliacao.veiculo.avaliacao.veiculo.models.Dados;
 import com.avaliacao.veiculo.avaliacao.veiculo.models.Modelos;
-import com.avaliacao.veiculo.avaliacao.veiculo.models.Anos;
+import com.avaliacao.veiculo.avaliacao.veiculo.models.Veiculo;
 import com.avaliacao.veiculo.avaliacao.veiculo.service.ConsumoAPI;
 import com.avaliacao.veiculo.avaliacao.veiculo.service.ConverteDados;
 
@@ -69,9 +69,25 @@ public class Principal {
         modelosFiltrados.forEach(System.out::println);
 
         System.out.println("Digite por favor o código do modelo: ");
-        var
+        var codigoModelo = scanner.nextLine();
+
+        endereco = endereco + "/" + codigoModelo + "/anos";
+        json = consumo.obterDados(endereco);
+        List<Dados> anos = conversor.obterLista(json, Dados.class);
+        List<Veiculo> veiculos = new ArrayList<>();
+
+        for (int i = 0; i < anos.size(); i++) {
+            var enderecoAnos = endereco + "/" + anos.get(i).codigo();
+            json = consumo.obterDados(enderecoAnos);
+            Veiculo veiculo = conversor.obterDados(json, Veiculo.class);
+            veiculos.add(veiculo);
+        }
+
+        System.out.println("\nTodos os veículos filtrados com avaliações por ano: ");
+        veiculos.forEach(System.out::println);
+
+
 
     }
-
 
 }
